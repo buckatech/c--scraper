@@ -27,11 +27,11 @@ namespace MyApp
                 }
             }
             //var testNode = scrapeParts[1].QuerySelector("tr tr");
-            foreach (var nNode in scrapeParts[1].Descendants())
+            foreach (var nNode in scrapeParts[1].Descendants("b"))
                 {
                     if (nNode.NodeType == HtmlNodeType.Element)
                     {
-                        Console.WriteLine(nNode.InnerHtml);
+                        Console.WriteLine(nNode.InnerText);
                     }
                 }
         }
