@@ -101,26 +101,21 @@ namespace MyApp
             {
                 if (k[j].NodeType == HtmlNodeType.Element)
                 {
-                    // foreach (var item in j.ChildNodes)
-                    // {
-                    //     Console.WriteLine(item.InnerText);
-                    // }
                     for (int i = 0; i < 4; i++)
                     {
                         switch (i)
                         {
                             case 0:
-
-                                Console.WriteLine(k[j].ChildNodes[i].InnerHtml + "case1");
+                                mcList.Add(new McTngDcr{ Asset = k[j].ChildNodes[i].InnerHtml });
                                 break;
                             case 1:
-                                Console.WriteLine(k[j].ChildNodes[i].InnerHtml + "case2");
+                                mcList[j].Mc = k[j].ChildNodes[i].InnerHtml;
                                 break;
                             case 2:
-                                Console.WriteLine(k[j].ChildNodes[i].InnerHtml + "case3");
+                                mcList[j].Tng = k[j].ChildNodes[i].InnerHtml;                                
                                 break;
                             case 3:
-                                Console.WriteLine(k[j].ChildNodes[i].InnerHtml + "case4");
+                                mcList[j].Dcr = k[j].ChildNodes[i].InnerHtml;
                                 break;  
                             default:
                                 Console.WriteLine("ERR");
@@ -128,8 +123,8 @@ namespace MyApp
                         }
                     }
                 }
+            Console.WriteLine(mcList[j].Dcr);
             }
-            Console.WriteLine(mcList[0].Asset);
         }
     }
 }
