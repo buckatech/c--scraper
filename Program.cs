@@ -8,7 +8,7 @@ namespace Primary
 {
     public class Program 
     {
-        public static void UseParams(IEnumerable<HtmlNode> list, List<HtmlNode> item)
+        public static void IterAndAddNode(IEnumerable<HtmlNode> list, List<HtmlNode> item)
         {
             foreach (var i in list)
             {
@@ -18,14 +18,47 @@ namespace Primary
                 }
             }
         }
+        public static void LoopToFinal(List<HtmlNode> sourceList, List<McTngDcr> outputList)
+        {
+            for (int j = 0; j < sourceList.Count; j++)
+            {
+                if(sourceList[j].NodeType == HtmlNodeType.Element)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                outputList.Add(new McTngDcr{ Asset = sourceList[j].ChildNodes[i].InnerHtml });
+                                break;
+                            case 1:
+                                outputList[j].Mc = sourceList[j].ChildNodes[i].InnerHtml;
+                                break;
+                            case 2:
+                                outputList[j].Tng = sourceList[j].ChildNodes[i].InnerHtml;                                
+                                break;
+                            case 3:
+                                outputList[j].Dcr = sourceList[j].ChildNodes[i].InnerHtml;
+                                break;  
+                            default:
+                                Console.WriteLine("ERR");
+                                break;
+                        }
+                    }
+                }
+                Console.WriteLine(outputList[j].Asset);
+            }
+        }
         public static void Main(string[] args) 
         {
             ScrapeData EtsAeso = new ScrapeData();
-            EtsAeso.TargetUrl = @"http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet";
             TempScrapeData TmpScrapeData = new TempScrapeData();
-            UseParams(EtsAeso.BodyData(), TmpScrapeData.scrapeParts);
             TableData mainTable = new TableData();
-            UseParams(TmpScrapeData.scrapeParts[1].Descendants("table"), mainTable.Tables);
+            FuelData bioTable = new FuelData();
+
+            EtsAeso.TargetUrl = @"http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet";
+            IterAndAddNode(EtsAeso.BodyData(), TmpScrapeData.scrapeParts);
+            IterAndAddNode(TmpScrapeData.scrapeParts[1].Descendants("table"), mainTable.Tables);
             // Tables[3] Contains timestamp
             // Tables[5] Contains summary
             // Tables[6] Contains total table
@@ -34,42 +67,15 @@ namespace Primary
             // Tables[13] Contains hydro table
             // Tables[14] Contains wind table
             // Tables[15] Contains biomass and other table
-            UseParams(mainTable.Tables[15].Descendants("tr"), mainTable.DataTable);
+            IterAndAddNode(mainTable.Tables[15].Descendants("tr"), mainTable.BiomassTable);
+            Console.WriteLine(mainTable.BiomassTable.Count);
+            // BIOTABLE
             //dt[0] title
             //dt[1] css (bad)
             //dt [2]+ is data for each plant
-            var bioTable = new FuelData();
-            bioTable.FuelTitle = mainTable.DataTable[0].InnerText;
-            mainTable.DataTable.RemoveRange(0, 2);
-            var k = mainTable.DataTable;
-            for (int j = 0; j < k.Count; j++)
-            {
-                if (k[j].NodeType == HtmlNodeType.Element)
-                {
-                    for (int i = 0; i < 4; i++)
-                    {
-                        switch (i)
-                        {
-                            case 0:
-                                bioTable.DataList.Add(new McTngDcr{ Asset = k[j].ChildNodes[i].InnerHtml });
-                                break;
-                            case 1:
-                                bioTable.DataList[j].Mc = k[j].ChildNodes[i].InnerHtml;
-                                break;
-                            case 2:
-                                bioTable.DataList[j].Tng = k[j].ChildNodes[i].InnerHtml;                                
-                                break;
-                            case 3:
-                                bioTable.DataList[j].Dcr = k[j].ChildNodes[i].InnerHtml;
-                                break;  
-                            default:
-                                Console.WriteLine("ERR");
-                                break;
-                        }
-                    }
-                }          
-            Console.WriteLine(bioTable.DataList[j].Asset);
-            }
+            bioTable.FuelTitle = mainTable.BiomassTable[0].InnerText;
+            mainTable.BiomassTable.RemoveRange(0, 2);
+            LoopToFinal(mainTable.BiomassTable, bioTable.DataList);
         }
     }
 }
