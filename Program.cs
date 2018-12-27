@@ -17,6 +17,8 @@ namespace Primary
             FuelData bioTable = new FuelData();
             FuelData windTable = new FuelData();
             FuelData hydroTable = new FuelData();
+            FuelData coalTable = new FuelData();
+            FuelData gasTable = new FuelData();
             EtsAeso.TargetUrl = @"http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet";
             ScrapeHelper.IterAndAddNode(EtsAeso.BodyData(), TmpScrapeData.scrapeParts);
             ScrapeHelper.IterAndAddNode(TmpScrapeData.scrapeParts[1].Descendants("table"), mainTable.Tables);
@@ -28,6 +30,9 @@ namespace Primary
             // Tables[13] Contains hydro table
             // Tables[14] Contains wind table
             // Tables[15] Contains biomass and other table
+            // Console.WriteLine(mainTable.Tables[11].InnerHtml);
+            FormatFuelData.Format(mainTable, 10, coalTable, mainTable.CoalTable);
+            FormatGasData.FormatGas(mainTable, 11, gasTable, mainTable.GasTable);  
             FormatFuelData.Format(mainTable, 13, hydroTable, mainTable.HydroTable);
             FormatFuelData.Format(mainTable, 14, windTable, mainTable.WindTable);            
             FormatFuelData.Format(mainTable, 15, bioTable, mainTable.BiomassTable);

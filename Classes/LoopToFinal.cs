@@ -45,6 +45,7 @@ public static void LoopToFinal(List<HtmlNode> sourceList, List<McTngDcr> outputL
                     }
                 }
             }
+            Console.WriteLine(outputList[j].Mc);
         }
     }
 }
