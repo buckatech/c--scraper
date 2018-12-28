@@ -4,7 +4,7 @@ using NpgsqlTypes;
 using Scrape;
 using Scrapers;
 using System.Collections.Generic;
-
+using ConnectSecret;
 
 namespace Psql
 {
@@ -14,7 +14,7 @@ class Test
 public static void insertRecord(String targetTable, String asset, String mc, String tng, String dcr)
 {
     // Open the connection to the psqlDb
-    using (var conn = new NpgsqlConnection(GetConnectionString()))
+    using (var conn = new NpgsqlConnection(ConnectToNpgSQL.GetConnection()))
     try
     {
         conn.Open();
@@ -56,12 +56,5 @@ public static void insertRecord(String targetTable, String asset, String mc, Str
         Console.WriteLine(ex);
     }
     }
-        static private string GetConnectionString()
-        {
-            // To avoid storing the connection string in your code, 
-            // you can retrieve it from a configuration file.
-            return "Server=127.0.0.1;User Id=bubbles; " + 
-                "Password=bubbles123;Database=cstest;";
-        }
     }
 }
