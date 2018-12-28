@@ -18,10 +18,10 @@ namespace Primary
             FuelData coalTable = new FuelData();
             FuelData gasTable = new FuelData();
             ScrapeToMain.ScrapeOut(bioTable, windTable, hydroTable, coalTable, gasTable);
-            MainTableInsert.insertMainTable(elapsedTicks);
+            // MainTableInsert.insertMainTable(elapsedTicks);
             foreach (var item in bioTable.DataList)
             {
-                Test.insertRecord("biotable", item.Asset, item.Mc, item.Tng, item.Dcr);
+                // Test.insertRecord("biotable", elapsedTicks, item.Asset, item.Mc, item.Tng, item.Dcr);
             }
             foreach (var item in windTable.DataList)
             {

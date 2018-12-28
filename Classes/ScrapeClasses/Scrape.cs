@@ -33,6 +33,7 @@ namespace Scrape
             // Tables[14] Contains wind table
             // Tables[15] Contains biomass and other table
             // Console.WriteLine(mainTable.Tables[11].InnerHtml);
+            Console.WriteLine(mainTable.Tables[6].OuterHtml);  
             FormatFuelData.Format(mainTable, 10, coalTable, mainTable.CoalTable);
             FormatGasData.FormatGas(mainTable, 11, gasTable, mainTable.GasTable);  
             FormatFuelData.Format(mainTable, 13, hydroTable, mainTable.HydroTable);

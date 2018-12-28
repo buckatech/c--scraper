@@ -11,7 +11,7 @@ namespace Psql
 class Test
         {
 // Insert new record to tb_music.
-public static void insertRecord(String targetTable, String asset, String mc, String tng, String dcr)
+public static void insertRecord(String targetTable, Int64 maintable_id, String asset, String mc, String tng, String dcr)
 {
     // Open the connection to the psqlDb
     using (var conn = new NpgsqlConnection(ConnectToNpgSQL.GetConnection()))
@@ -21,9 +21,11 @@ public static void insertRecord(String targetTable, String asset, String mc, Str
         // Console.WriteLine("Connection Initilized");
         // Create insert command.
         NpgsqlCommand command = new NpgsqlCommand("INSERT INTO " +
-            $"{targetTable}(asset, mc, tng, dcr) VALUES(:asset, :mc, " +
+            $"{targetTable}(maintable_id, asset, mc, tng, dcr) VALUES(:maintable_id, :asset, :mc, " +
             ":tng, :dcr)", conn);
         // Add paramaters.
+        command.Parameters.Add(new NpgsqlParameter("maintable_id",
+            NpgsqlTypes.NpgsqlDbType.Bigint));
         command.Parameters.Add(new NpgsqlParameter("asset",
             NpgsqlTypes.NpgsqlDbType.Text));
         command.Parameters.Add(new NpgsqlParameter("mc",
@@ -37,10 +39,11 @@ public static void insertRecord(String targetTable, String asset, String mc, Str
         command.Prepare();
 
         // Add value to the paramater.
-        command.Parameters[0].Value = asset;
-        command.Parameters[1].Value = mc;
-        command.Parameters[2].Value = tng;
-        command.Parameters[3].Value = dcr;
+        command.Parameters[0].Value = maintable_id;
+        command.Parameters[1].Value = asset;
+        command.Parameters[2].Value = mc;
+        command.Parameters[3].Value = tng;
+        command.Parameters[4].Value = dcr;
 
         // Execute SQL command.
         int recordAffected = command.ExecuteNonQuery();
