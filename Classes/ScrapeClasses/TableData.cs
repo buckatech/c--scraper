@@ -12,8 +12,9 @@ public class TableData
     public List<HtmlNode> HydroTable { get; set; }
     public List<HtmlNode> CoalTable { get; set; }
     public List<HtmlNode> GasTable { get; set; }
-    
-    public TableData()
+    public List<HtmlNode> TotalTable { get; set; }
+
+        public TableData()
     {
         Tables = new List<HtmlNode>();
         BiomassTable = new List<HtmlNode>();
@@ -21,6 +22,7 @@ public class TableData
         HydroTable = new List<HtmlNode>();
         CoalTable = new List<HtmlNode>();
         GasTable = new List<HtmlNode>();
+        TotalTable = new List<HtmlNode>();
     }
 }
 }

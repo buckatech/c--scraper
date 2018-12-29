@@ -17,8 +17,13 @@ namespace Primary
             FuelData hydroTable = new FuelData();
             FuelData coalTable = new FuelData();
             FuelData gasTable = new FuelData();
-            ScrapeToMain.ScrapeOut(bioTable, windTable, hydroTable, coalTable, gasTable);
+            FuelData totalTable = new FuelData();
+            ScrapeToMain.ScrapeOut(bioTable, windTable, hydroTable, coalTable, gasTable, totalTable);
             // MainTableInsert.insertMainTable(elapsedTicks);
+            foreach (var item in totalTable.DataList)
+            {
+                Console.WriteLine(item.Mc);
+            }
             foreach (var item in bioTable.DataList)
             {
                 // Test.insertRecord("biotable", elapsedTicks, item.Asset, item.Mc, item.Tng, item.Dcr);
