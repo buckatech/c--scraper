@@ -21,8 +21,5 @@
     <Folder Include="Classes\DataToSQL\" />
     <Folder Include="Classes\PublicEndpoint\" />
     <Folder Include="Structs\" />
-    <Folder Include="Obsolete\" />
-    <Folder Include="Obsolete\ServerOld\" />
-    <Folder Include="Obsolete\ScrapeClassesOld\" />
   </ItemGroup>
 </Project>
