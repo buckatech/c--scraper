@@ -36,19 +36,19 @@ namespace Primary
             {
                 FuelDataRaw = Testdata["Biomass"]
             };
-
-            // var InterchangeData = Interchange.GetInterchangeDataRaw();
-            // var SummaryData = Summary.GetSummaryDataRaw();
-            // var HydroData = Hydro.GetFuelDataRaw();
-            // var coalData = Coal.GetFuelDataRaw();
-            var windData = Wind.GetFuelDataRaw();
-            foreach (KeyValuePair<string, List<string>> kvp in windData)
+            var Gas = new GasTable
             {
-                Console.WriteLine(kvp.Key);
-                foreach (var i in kvp.Value)
-                {
-                    Console.WriteLine(i);
-                }
+                GasDataRaw = Testdata["Gas"]
+            };
+             var InterchangeData = Interchange.GetInterchangeDataRaw();
+             var SummaryData = Summary.GetSummaryDataRaw();
+             var HydroData = Hydro.GetFuelDataRaw();
+             var coalData = Coal.GetFuelDataRaw();
+             var windData = Wind.GetFuelDataRaw();
+            var gasData = Gas.GetRawGasData();
+            foreach (var i in gasData)
+            {
+                Console.WriteLine(i);
             }
         }
     }
