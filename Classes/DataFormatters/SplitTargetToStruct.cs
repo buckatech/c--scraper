@@ -13,7 +13,8 @@ namespace Scouter.Classes.DataFormatters
         {
             Dictionary<string, HtmlNode> nodeDictionary =
                 new Dictionary<string, HtmlNode>();
-            for (var i = 0; i < targHtml.Count; i++)
+            int countLen = targHtml.Count;
+            for (var i = 0; i < countLen; i++)
             {
                 /* RELEVENT TABLES
                  i = [3] Contains timestamp
@@ -47,7 +48,7 @@ namespace Scouter.Classes.DataFormatters
                         nodeDictionary.Add("Gas", targHtml[i]);
                         break;
                     case 13:
-                        nodeDictionary.Add("Hyrdo", targHtml[i]);
+                        nodeDictionary.Add("Hydro", targHtml[i]);
                         break;
                     case 14:
                         nodeDictionary.Add("Wind", targHtml[i]);
@@ -57,7 +58,7 @@ namespace Scouter.Classes.DataFormatters
                         break;
                 }
             }
-            // Console.WriteLine(nodeDictionary["Summary"].InnerText);
+
             return nodeDictionary;
         }
     }

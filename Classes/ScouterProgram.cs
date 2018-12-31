@@ -20,12 +20,35 @@ namespace Primary
             {
                 SummaryDataRaw = Testdata["Summary"]
             };
+            var Hydro = new FuelTable
+            {
+                FuelDataRaw = Testdata["Hydro"]
+            };
+            var Coal = new FuelTable
+            {
+                FuelDataRaw = Testdata["Coal"]
+            };
+            var Wind = new FuelTable
+            {
+                FuelDataRaw = Testdata["Wind"]
+            };
+            var Biomass = new FuelTable
+            {
+                FuelDataRaw = Testdata["Biomass"]
+            };
 
             // var InterchangeData = Interchange.GetInterchangeDataRaw();
-            var SummaryData = Summary.GetSummaryDataRaw();
-            foreach (KeyValuePair<string, string> entity in SummaryData)
+            // var SummaryData = Summary.GetSummaryDataRaw();
+            // var HydroData = Hydro.GetFuelDataRaw();
+            // var coalData = Coal.GetFuelDataRaw();
+            var windData = Wind.GetFuelDataRaw();
+            foreach (KeyValuePair<string, List<string>> kvp in windData)
             {
-                Console.WriteLine(entity);
+                Console.WriteLine(kvp.Key);
+                foreach (var i in kvp.Value)
+                {
+                    Console.WriteLine(i);
+                }
             }
         }
     }

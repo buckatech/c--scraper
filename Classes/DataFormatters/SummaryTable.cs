@@ -16,7 +16,8 @@ namespace Scouter.Classes.DataFormatters
                 new Dictionary<string, string>();
             var Descendents = SummaryDataRaw.Descendants("tr").ToList();
             Descendents.RemoveAt(0);
-            for (var i = 0; i < Descendents.Count; i++)
+            int iterLimit = Descendents.Count;
+            for (var i = 0; i < iterLimit; i++)
             {
                 SummaryOutput.Add(Descendents[i].FirstChild.InnerText, Descendents[i].LastChild.InnerText);
             }

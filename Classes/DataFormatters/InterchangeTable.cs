@@ -16,7 +16,8 @@ namespace Scouter.Classes.DataFormatters
                 new Dictionary<string, string>();
             var Descendents = InterchangeDataRaw.Descendants("tr").ToList();
             Descendents.RemoveRange(0, 2);
-            for (var i = 0; i < Descendents.Count; i++)
+            int IterLimit = Descendents.Count;
+            for (var i = 0; i < IterLimit; i++)
             {
                 InterChangeOutput.Add(Descendents[i].FirstChild.InnerText, Descendents[i].LastChild.InnerText);
             }
