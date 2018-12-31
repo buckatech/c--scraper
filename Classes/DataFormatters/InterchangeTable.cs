@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Scouter.Structs;
-using Scouter.Classes.ScrapeHandler;
 using HtmlAgilityPack;
-using Fizzler.Systems.HtmlAgilityPack;
 namespace Scouter.Classes.DataFormatters
 {
     public class InterchangeTable

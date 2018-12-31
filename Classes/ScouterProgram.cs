@@ -1,55 +1,58 @@
-﻿using System;
-using Scouter.Classes.ScrapeHandler;
+﻿using Scouter.Classes.ScrapeHandler;
 using Scouter.Classes.DataFormatters;
 using System.Collections.Generic;
 using HtmlAgilityPack;
-namespace Primary
+namespace Scouter.Classes.MainData
 {
-    public class Program
+    public class GetData
     {
-        public static void Main(string[] args)
+        private AesoDataFormatter InnerBodyHtml = new AesoDataFormatter();
+        private SplitTargetToStruct DataFormatter = new SplitTargetToStruct();
+        public Dictionary<string, string> InterchangeData;
+        public Dictionary<string, string> SummaryData;
+        public Dictionary<string, List<string>> HydroData;
+        public Dictionary<string, List<string>> CoalData;
+        public Dictionary<string, List<string>> WindData;
+        public Dictionary<string, List<string>> BiomassData;
+        public List<Dictionary<string, List<string>>> GasData;
+        public GetData()
         {
-            var InnerBodyHtml = new AesoDataFormatter();
-            var DataFormatter = new SplitTargetToStruct();
-            var Testdata = DataFormatter.SplitToCategories(InnerBodyHtml.TargetNodes());
-            var Interchange = new InterchangeTable
+            Dictionary<string, HtmlNode> Testdata = DataFormatter.SplitToCategories(InnerBodyHtml.TargetNodes());
+            InterchangeTable Interchange = new InterchangeTable
             {
                 InterchangeDataRaw = Testdata["InterchangeTable"]
             };
-            var Summary = new SummaryTable
+            SummaryTable Summary = new SummaryTable
             {
                 SummaryDataRaw = Testdata["Summary"]
             };
-            var Hydro = new FuelTable
+            FuelTable Hydro = new FuelTable
             {
                 FuelDataRaw = Testdata["Hydro"]
             };
-            var Coal = new FuelTable
+            FuelTable Coal = new FuelTable
             {
                 FuelDataRaw = Testdata["Coal"]
             };
-            var Wind = new FuelTable
+            FuelTable Wind = new FuelTable
             {
                 FuelDataRaw = Testdata["Wind"]
             };
-            var Biomass = new FuelTable
+            FuelTable Biomass = new FuelTable
             {
                 FuelDataRaw = Testdata["Biomass"]
             };
-            var Gas = new GasTable
+            GasTable Gas = new GasTable
             {
                 GasDataRaw = Testdata["Gas"]
             };
-             var InterchangeData = Interchange.GetInterchangeDataRaw();
-             var SummaryData = Summary.GetSummaryDataRaw();
-             var HydroData = Hydro.GetFuelDataRaw();
-             var coalData = Coal.GetFuelDataRaw();
-             var windData = Wind.GetFuelDataRaw();
-            var gasData = Gas.GetRawGasData();
-            foreach (var i in gasData)
-            {
-                Console.WriteLine(i);
-            }
+            InterchangeData = Interchange.GetInterchangeDataRaw();
+            SummaryData = Summary.GetSummaryDataRaw();
+            CoalData = Coal.GetFuelDataRaw();
+            HydroData = Hydro.GetFuelDataRaw();
+            WindData = Wind.GetFuelDataRaw();
+            BiomassData = Biomass.GetFuelDataRaw();
+            GasData = Gas.GetRawGasData();
         }
     }
 }

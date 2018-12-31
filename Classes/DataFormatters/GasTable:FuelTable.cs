@@ -1,11 +1,6 @@
-﻿using System;
-using Scouter.Classes.DataFormatters;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Scouter.Structs;
-using Scouter.Classes.ScrapeHandler;
 using HtmlAgilityPack;
-using Fizzler.Systems.HtmlAgilityPack;
 namespace Scouter.Classes.DataFormatters
 {
     public class GasTable: FuelTable
@@ -14,14 +9,19 @@ namespace Scouter.Classes.DataFormatters
         public List<Dictionary<string, List<string>>> GetRawGasData()
         {
             var innerGas = GasDataRaw.Descendants("tr").ToList();
+
             Dictionary<string, List<string>> SimpleOutput =
                 new Dictionary<string, List<string>>();
+
             Dictionary<string, List<string>> CogenerationOutput =
                 new Dictionary<string, List<string>>();
+
             Dictionary<string, List<string>> CombinedOutput =
                 new Dictionary<string, List<string>>();
+
             List<Dictionary<string, List<string>>> GasOutput =
                 new List<Dictionary<string, List<string>>>();
+
             var status = 0;
             for (var i = 0; i < innerGas.Count; i++)
             {
