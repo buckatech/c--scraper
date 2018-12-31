@@ -10,6 +10,7 @@ namespace Scouter.Classes.ScrapeHandler
     {
         private HtmlWeb WebHtml = new HtmlWeb();
         public List<HtmlNode> ScrapedHtml;
+        // Loads raw html from data source and returns a list containing each body
         public AesoServerHandler()
         {
             ScrapedHtml = WebHtml.Load(@"http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet").DocumentNode.QuerySelectorAll("body").ToList();

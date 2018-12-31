@@ -16,10 +16,16 @@ namespace Primary
             {
                 InterchangeDataRaw = Testdata["InterchangeTable"]
             };
-            var InterchangeData = Interchange.GetInterchangeDataRaw();
-            foreach (KeyValuePair<string, string> entry in InterchangeData)
+            var Summary = new SummaryTable
             {
-                Console.WriteLine(entry);
+                SummaryDataRaw = Testdata["Summary"]
+            };
+
+            // var InterchangeData = Interchange.GetInterchangeDataRaw();
+            var SummaryData = Summary.GetSummaryDataRaw();
+            foreach (KeyValuePair<string, string> entity in SummaryData)
+            {
+                Console.WriteLine(entity);
             }
         }
     }

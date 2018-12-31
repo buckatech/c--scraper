@@ -11,10 +11,12 @@ namespace Scouter.Classes.ScrapeHandler
     {   
         public HtmlNode InnerHtmlBody;
         public List<HtmlNode> inputList = new AesoServerHandler().ScrapedHtml;
+        // Constructs Dataformatter with the body containing the relevent data
         public AesoDataFormatter()
         {
             InnerHtmlBody = inputList[1];
         }
+        // Seperate each table into a list
         public List<HtmlNode> TargetNodes()
         {
             return InnerHtmlBody.Descendants("table").ToList();
