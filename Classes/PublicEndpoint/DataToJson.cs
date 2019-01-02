@@ -1,7 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Scouter.Classes.PublicEndpoint;
-using System.Collections.Generic;
 using System.Collections;
 using Scouter.Classes.MainData;
 
