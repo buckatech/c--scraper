@@ -22,4 +22,7 @@
     <Folder Include="Classes\PublicEndpoint\" />
     <Folder Include="Structs\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Classes\PublicEndpoint\TestObj.cs" />
+  </ItemGroup>
 </Project>

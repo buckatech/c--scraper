@@ -6,8 +6,17 @@ namespace Scouter.Classes
 {
     public class ServerHandler
     {
-        public void InsertToMainServer()
+        public void SelectFromServer(long pk)
         {
+            var selectx = new SelectFromServer();
+            selectx.SelectMain(pk);
+
+            Console.WriteLine("fired");
+        }
+        public long InsertToMainServer()
+        {
+
+
             GetData Data = new GetData();
             Dictionary<string, string> summary = Data.SummaryData;
             Dictionary<string, string> interchange = Data.InterchangeData;
@@ -85,6 +94,7 @@ namespace Scouter.Classes
 
                 }
             }
+            return pK;
         }
     }
 }
