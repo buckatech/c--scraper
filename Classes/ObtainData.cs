@@ -1,7 +1,7 @@
-﻿using Scouter.Classes.ScrapeHandler;
-using Scouter.Classes.DataFormatters;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HtmlAgilityPack;
+using Scouter.Classes.DataFormatters;
+using Scouter.Classes.ScrapeHandler;
 namespace Scouter.Classes.MainData
 {
     public class GetData
@@ -17,34 +17,34 @@ namespace Scouter.Classes.MainData
         public List<Dictionary<string, List<string>>> GasData;
         public GetData()
         {
-            Dictionary<string, HtmlNode> Testdata = DataFormatter.SplitToCategories(InnerBodyHtml.TargetNodes());
+            Dictionary<string, HtmlNode> TableData = DataFormatter.SplitToCategories(InnerBodyHtml.TargetNodes());
             InterchangeTable Interchange = new InterchangeTable
             {
-                InterchangeDataRaw = Testdata["InterchangeTable"]
+                InterchangeDataRaw = TableData["InterchangeTable"]
             };
             SummaryTable Summary = new SummaryTable
             {
-                SummaryDataRaw = Testdata["Summary"]
+                SummaryDataRaw = TableData["Summary"]
             };
             FuelTable Hydro = new FuelTable
             {
-                FuelDataRaw = Testdata["Hydro"]
+                FuelDataRaw = TableData["Hydro"]
             };
             FuelTable Coal = new FuelTable
             {
-                FuelDataRaw = Testdata["Coal"]
+                FuelDataRaw = TableData["Coal"]
             };
             FuelTable Wind = new FuelTable
             {
-                FuelDataRaw = Testdata["Wind"]
+                FuelDataRaw = TableData["Wind"]
             };
             FuelTable Biomass = new FuelTable
             {
-                FuelDataRaw = Testdata["Biomass"]
+                FuelDataRaw = TableData["Biomass"]
             };
             GasTable Gas = new GasTable
             {
-                GasDataRaw = Testdata["Gas"]
+                GasDataRaw = TableData["Gas"]
             };
             InterchangeData = Interchange.GetInterchangeDataRaw();
             SummaryData = Summary.GetSummaryDataRaw();
