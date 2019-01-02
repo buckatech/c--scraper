@@ -1,7 +1,5 @@
 ﻿using System;
 using Npgsql;
-using NpgsqlTypes;
-using System.Collections.Generic;
 using ConnectSecret;
 
 namespace Scouter.Classes.DataToSql
@@ -11,7 +9,7 @@ namespace Scouter.Classes.DataToSql
         public long InsertMain(string targetTable, long timeStamp)
         {
             // Open the connection to the psqlDb
-            using (var conn = new NpgsqlConnection(ConnectToNpgSQL.GetConnection()))
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectToNpgSQL.GetConnection()))
                 try
                 {
                     conn.Open();
@@ -29,7 +27,7 @@ namespace Scouter.Classes.DataToSql
                     command.Parameters[0].Value = timeStamp;
 
                     // Execute SQL command.
-                    var recordAffected = command.ExecuteScalar();
+                    object recordAffected = command.ExecuteScalar();
                     if (Convert.ToBoolean(recordAffected))
                     {
                         return Convert.ToInt64(recordAffected);
@@ -48,7 +46,7 @@ namespace Scouter.Classes.DataToSql
         public void InsertSummary(string targetTable, long pk, string name, string value)
         {
             // Open the connection to the psqlDb
-            using (var conn = new NpgsqlConnection(ConnectToNpgSQL.GetConnection()))
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectToNpgSQL.GetConnection()))
                 try
                 {
                     conn.Open();
@@ -90,7 +88,7 @@ namespace Scouter.Classes.DataToSql
         public void InsertFuelRecord(string targetTable, long pk, string asset, string mc, string tng, string dcr)
         {
             // Open the connection to the psqlDb
-            using (var conn = new NpgsqlConnection(ConnectToNpgSQL.GetConnection()))
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectToNpgSQL.GetConnection()))
                 try
                 {
                     conn.Open();

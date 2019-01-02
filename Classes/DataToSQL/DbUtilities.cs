@@ -1,7 +1,5 @@
 ﻿using System;
 using Npgsql;
-using NpgsqlTypes;
-using System.Collections.Generic;
 using ConnectSecret;
 
 namespace Scouter.Classes.DataToSql
@@ -14,7 +12,7 @@ namespace Scouter.Classes.DataToSql
             using (conn = new NpgsqlConnection(ConnectToNpgSQL.GetConnection()))
             {
                 conn.Open();
-                using (var cmd = new NpgsqlCommand(
+                using (NpgsqlCommand cmd = new NpgsqlCommand(
                 "DROP TABLE IF EXISTS main_table, coal_table, hydro_table, wind_table, biomass_table, interchange_table, summary_table, simple_cycle_table, cogeneration_table, combined_cycle_table; " +
                 "CREATE TABLE main_table(id SERIAL, time_stamp BIGINT);" +
                 "CREATE TABLE coal_table(id SERIAL, main_table_id INTEGER, asset TEXT, mc TEXT, tng TEXT, dcr TEXT); " +

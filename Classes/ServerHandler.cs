@@ -8,20 +8,26 @@ namespace Scouter.Classes
     {
         public void InsertToMainServer()
         {
-            var Data = new GetData();
-            var coal = Data.CoalData;
-            var wind = Data.WindData;
-            var biomass = Data.BiomassData;
-            var hydro = Data.HydroData;
-            var summary = Data.SummaryData;
-            var gas = Data.GasData;
-            var interchange = Data.InterchangeData;
+            GetData Data = new GetData();
+            Dictionary<string, string> summary = Data.SummaryData;
+            Dictionary<string, string> interchange = Data.InterchangeData;
+            Dictionary<string, List<string>> coal = Data.CoalData;
+            Dictionary<string, List<string>> wind = Data.WindData;
+            Dictionary<string, List<string>> biomass = Data.BiomassData;
+            Dictionary<string, List<string>> hydro = Data.HydroData;
+            List<Dictionary<string, List<string>>> gas = Data.GasData;
+
             long currentTime = DateTime.Now.Ticks;
-            var db = new InsertToServer();
-            var selectDb = new SelectFromServer();
-            var util = new DataUtilities();
+
+            InsertToServer db = new InsertToServer();
+
+            SelectFromServer selectDb = new SelectFromServer();
+
+            DataUtilities util = new DataUtilities();
             util.DbMigrate();
+
             long pK = db.InsertMain("main_table", currentTime);
+
             if (pK > 0)
             {
                 Console.WriteLine(pK);
@@ -54,7 +60,7 @@ namespace Scouter.Classes
             {
                 db.InsertSummary("interchange_table", pK, entry.Key, entry.Value);
             }
-            for (var i = 0; i < gas.Count; i++)
+            for (int i = 0; i < gas.Count; i++)
             {
                 switch (i)
                 {
